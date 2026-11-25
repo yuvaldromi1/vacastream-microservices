@@ -1,0 +1,90 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: vacastream-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: vacastream
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./Database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  auth:
+    container_name: vacastream-auth
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+      args:
+        SERVICE: Auth
+    environment:
+      PORT: 3001
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_NAME: vacastream
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  vacation:
+    container_name: vacastream-vacation
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+      args:
+        SERVICE: Vacation
+    environment:
+      PORT: 3002
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_NAME: vacastream
+    volumes:
+      - vacation-uploads:/app/Backend/Vacation/src/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  gateway:
+    container_name: vacastream-gateway
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+      args:
+        SERVICE: Gateway
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      AUTH_SERVICE_URL: http://auth:3001
+      VACATION_SERVICE_URL: http://vacation:3002
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: http://localhost
+    depends_on:
+      - auth
+      - vacation
+
+  frontend:
+    container_name: vacastream-frontend
+    build:
+      context: .
+      dockerfile: Frontend/web-app/Dockerfile
+      args:
+        VITE_API_URL: http://localhost:3000
+    ports:
+      - "80:80"
+    depends_on:
+      - gateway
+
+volumes:
+  mysql-data:
+  vacation-uploads:

@@ -1,0 +1,37 @@
+{
+    "name": "vacastream-web-app",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "start": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "catalog:frontend",
+        "axios": "catalog:frontend",
+        "notyf": "catalog:frontend",
+        "react": "catalog:frontend",
+        "react-dom": "catalog:frontend",
+        "react-redux": "catalog:frontend",
+        "react-router-dom": "catalog:frontend",
+        "recharts": "catalog:frontend"
+    },
+    "devDependencies": {
+        "@eslint/js": "catalog:frontend",
+        "@types/node": "catalog:frontend",
+        "@types/react": "catalog:frontend",
+        "@types/react-dom": "catalog:frontend",
+        "@vitejs/plugin-react": "catalog:frontend",
+        "eslint": "catalog:frontend",
+        "eslint-plugin-react-hooks": "catalog:frontend",
+        "eslint-plugin-react-refresh": "catalog:frontend",
+        "globals": "catalog:frontend",
+        "typescript": "catalog:frontend",
+        "typescript-eslint": "catalog:frontend",
+        "vite": "catalog:frontend"
+    }
+}

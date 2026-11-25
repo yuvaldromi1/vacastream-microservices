@@ -1,0 +1,53 @@
+packages:
+  - Backend/*
+  - Frontend/*
+  - Libraries/@YD/*
+
+catalogs:
+  backend:
+    '@types/bcryptjs': ^2.4.6
+    '@types/cors': ^2.8.17
+    '@types/express': ^5.0.6
+    '@types/jsonwebtoken': ^9.0.7
+    '@types/multer': ^1.4.12
+    '@types/node': ^22.13.1
+    '@types/uuid': ^10.0.0
+    axios: ^1.7.9
+    bcryptjs: ^2.4.3
+    cors: ^2.8.5
+    csv-stringify: ^6.5.2
+    dotenv: ^17.2.3
+    express: ^5.2.1
+    express-rate-limit: ^7.5.0
+    helmet: ^8.1.0
+    http-proxy-middleware: ^3.0.3
+    jsonwebtoken: ^9.0.2
+    multer: ^1.4.5-lts.1
+    mysql2: ^3.12.0
+    nodemon: ^3.1.9
+    ts-node: ^10.9.2
+    typescript: ^5.7.3
+    uuid: ^11.1.0
+  frontend:
+    '@eslint/js': ^9.39.1
+    '@reduxjs/toolkit': ^2.11.2
+    '@types/node': ^24.10.1
+    '@types/react': ^19.2.7
+    '@types/react-dom': ^19.2.3
+    '@vitejs/plugin-react': ^5.1.1
+    axios: ^1.13.5
+    eslint: ^9.39.1
+    eslint-plugin-react-hooks: ^7.0.1
+    eslint-plugin-react-refresh: ^0.4.24
+    globals: ^16.5.0
+    notyf: ^3.10.0
+    react: ^19.2.0
+    react-dom: ^19.2.0
+    react-redux: ^9.2.0
+    react-router-dom: ^7.13.0
+    recharts: ^3.7.0
+    typescript: ~5.9.3
+    typescript-eslint: ^8.48.0
+    vite: ^7.3.1
+
+onlyBuiltDependencies: esbuild

@@ -22,7 +22,7 @@ A vacation browsing platform built as microservices: users browse vacations and 
 
 **Backend:** Node.js · Express 5 · TypeScript · MySQL (mysql2) · JWT · bcrypt · Helmet · express-rate-limit · http-proxy-middleware · Multer
 **Frontend:** React · TypeScript · Redux Toolkit · React Router · Recharts · Vite
-**DevOps:** Docker · Docker Compose · Nginx · pnpm workspaces (monorepo) · GitHub Actions CI
+**DevOps:** Docker · Docker Compose · Nginx · pnpm workspaces (monorepo) · GitHub Actions CI/CD · Docker Hub
 **Testing:** Vitest
 
 ## Architecture
@@ -94,6 +94,7 @@ pnpm test
 On every push, GitHub Actions:
 1. installs and builds all packages and runs the unit tests
 2. builds the Docker images, starts the whole system with Docker Compose, logs in as the demo admin through the gateway, loads the vacations and checks that the frontend is served
+3. pushes the four service images to Docker Hub, tagged `latest` and with the commit SHA: [yuvaldt/vacastream-auth](https://hub.docker.com/r/yuvaldt/vacastream-auth), [vacation](https://hub.docker.com/r/yuvaldt/vacastream-vacation), [gateway](https://hub.docker.com/r/yuvaldt/vacastream-gateway), [frontend](https://hub.docker.com/r/yuvaldt/vacastream-frontend)
 
 ## What I Learned
 

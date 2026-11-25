@@ -1,5 +1,7 @@
 # VacaStream
 
+[![CI](https://github.com/yuvaldromi1/vacastream-microservices/actions/workflows/ci.yml/badge.svg)](https://github.com/yuvaldromi1/vacastream-microservices/actions/workflows/ci.yml)
+
 A vacation browsing platform built as microservices: users browse vacations and like the ones they want, and admins manage vacations and see reports. The whole system runs with one `docker compose up`.
 
 ![Vacations page](docs/screenshot.png)
@@ -20,7 +22,8 @@ A vacation browsing platform built as microservices: users browse vacations and 
 
 **Backend:** Node.js · Express 5 · TypeScript · MySQL (mysql2) · JWT · bcrypt · Helmet · express-rate-limit · http-proxy-middleware · Multer
 **Frontend:** React · TypeScript · Redux Toolkit · React Router · Recharts · Vite
-**DevOps:** Docker · Docker Compose · Nginx · pnpm workspaces (monorepo)
+**DevOps:** Docker · Docker Compose · Nginx · pnpm workspaces (monorepo) · GitHub Actions CI
+**Testing:** Vitest
 
 ## Architecture
 
@@ -80,11 +83,28 @@ cp Backend/Auth/.env.example Backend/Auth/.env           # same for Gateway and 
 pnpm dev     # Gateway 3000, Auth 3001, Vacation 3002, Frontend 5173
 ```
 
+## Tests & CI
+
+```bash
+pnpm test
+```
+
+23 unit tests (Vitest) cover registration and login logic with a mocked database, JWT creation and verification, the gateway's auth middleware, role-based access and error handling.
+
+On every push, GitHub Actions:
+1. installs and builds all packages and runs the unit tests
+2. builds the Docker images, starts the whole system with Docker Compose, logs in as the demo admin through the gateway, loads the vacations and checks that the frontend is served
+
 ## What I Learned
 
 - Splitting a backend into services behind an API gateway, and sharing code between them as internal packages
 - Containerizing a multi-service system with Docker Compose: health checks, volumes, service dependencies
 - Role-based access control with JWT
+- Testing services in isolation with mocks, and verifying the full system in CI
+
+## Credits
+
+New York photo: "New York City skyline with Empire State Building" by Storylanding, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:New_York_City_skyline_with_Empire_State_Building_1.jpg), CC0.
 
 ## Author
 

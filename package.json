@@ -6,9 +6,14 @@
     "scripts": {
         "dev": "pnpm -r --parallel --if-present run dev",
         "build": "pnpm -r run build",
-        "start": "pnpm --filter \"@yd/*\" -r run build && pnpm -r --parallel --if-present run start"
+        "start": "pnpm --filter \"@yd/*\" -r run build && pnpm -r --parallel --if-present run start",
+        "test": "vitest run"
     },
     "author": "Yuval Dromi",
     "license": "ISC",
-    "packageManager": "pnpm@10.28.0"
+    "packageManager": "pnpm@10.28.0",
+    "devDependencies": {
+        "bcryptjs": "^2.4.3",
+        "vitest": "^3.2.7"
+    }
 }

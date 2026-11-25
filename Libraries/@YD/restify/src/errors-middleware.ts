@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { StatusCode } from "./enums.js";
 import { AppError, NotFoundError } from "./client-errors.js";
 
-export function errorMiddleware(err: Error, req: Request, res: Response, next: NextFunction): void {
+export function errorMiddleware(err: Error, req: Request, res: Response, _next: NextFunction): void {
     // Log error to console:
     console.error(err);
 
